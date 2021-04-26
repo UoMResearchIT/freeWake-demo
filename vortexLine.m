@@ -1,15 +1,15 @@
 function [u, v, w] = vortexLine(x1, y1, z1, x2, y2, z2, Gamma, xp, yp, zp)
     
     % r1 vector (from x1 to xp)
-    r1x = xp - x1;
-    r1y = yp - y1;
-    r1z = zp - z1;
+    r1x = bsxfun(@minus, xp, x1);
+    r1y = bsxfun(@minus, yp, y1);
+    r1z = bsxfun(@minus, zp, z1);
     r1  = sqrt(r1x.^2 + r1y.^2 + r1z.^2);
     
     % r2 vector (from x2 to xp)
-    r2x = xp - x2;
-    r2y = yp - y2;
-    r2z = zp - z2;
+    r2x = bsxfun(@minus, xp, x2);
+    r2y = bsxfun(@minus, yp, y2);
+    r2z = bsxfun(@minus, zp, z2);
     r2  = sqrt(r2x.^2 + r2y.^2 + r2z.^2);
     
     % r0 vector (from x1 to x2)
@@ -37,7 +37,7 @@ function [u, v, w] = vortexLine(x1, y1, z1, x2, y2, z2, Gamma, xp, yp, zp)
     uz = r3z ./ r3;
     
     % velocity components at p induced by each filament
-    B = Gamma.*(cos1 - cos2)./(4*pi*h);
+    B = bsxfun(@rdivide, Gamma, (cos1 - cos2))./(4*pi*h);
     u = B .* ux;
     v = B .* uy;
     w = B .* uz;
