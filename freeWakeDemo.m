@@ -34,7 +34,7 @@ for ii = 1:b
     % blades
     xp = reshape(x(:,ii,:), [], 1);
     yp = reshape(y(:,ii,:), [], 1);
-    zp = reshape(z(:,ii,:), [], 1);        
+    zp = reshape(z(:,ii,:), [], 1);
     
     % loop over the wake from each blade
     [ublade, vblade, wblade] = deal( zeros(length(xp),b) );
@@ -43,55 +43,55 @@ for ii = 1:b
         % trailing filament induction
         [x1,y1,z1,x2,y2,z2] = trailed_nodes(x(:,jj,:),y(:,jj,:),z(:,jj,:));
         Gamma = rand(size(x1));
-        [utrailed, vtrailed, wtrailed] = vortexLine(x1, y1, z1, x2, y2, z2, Gamma, xp, yp, zp);        
+        [utrailed, vtrailed, wtrailed] = vortexLine(x1, y1, z1, x2, y2, z2, Gamma, xp, yp, zp);
         
         % shed filament induction
-        [x1,y1,z1,x2,y2,z2] = shed_nodes(x(:,jj,:),y(:,jj,:),z(:,jj,:));  
+        [x1,y1,z1,x2,y2,z2] = shed_nodes(x(:,jj,:),y(:,jj,:),z(:,jj,:));
         Gamma = rand(size(x1));
-        [ushed, vshed, wshed] = vortexLine(x1, y1, z1, x2, y2, z2, Gamma, xp, yp, zp);  
+        [ushed, vshed, wshed] = vortexLine(x1, y1, z1, x2, y2, z2, Gamma, xp, yp, zp);
         
         % sum the trailed and shed inductions
         ublade(:,jj) = sum(utrailed,2) + sum(ushed, 2);
         vblade(:,jj) = sum(vtrailed,2) + sum(vshed, 2);
         wblade(:,jj) = sum(wtrailed,2) + sum(wshed, 2);
-                
+        
     end
     
     % sum the induction from all the blades on the ii-th blade and reshape
     u(:,ii,:) = reshape( sum(ublade,2), [rows 1 pags] );
     v(:,ii,:) = reshape( sum(vblade,2), [rows 1 pags] );
     w(:,ii,:) = reshape( sum(wblade,2), [rows 1 pags] );
-            
-end 
+    
+end
 
 toc
 
 function [x1,y1,z1,x2,y2,z2] = trailed_nodes(x,y,z)
-
-% start nodes
-x1 = reshape( x(:,:,1:end-1), 1, []);
-y1 = reshape( y(:,:,1:end-1), 1, []);
-z1 = reshape( z(:,:,1:end-1), 1, []);
-
-% end nodes
-x2 = reshape( x(:,:,2:end), 1, []);
-y2 = reshape( y(:,:,2:end), 1, []);
-z2 = reshape( z(:,:,2:end), 1, []);
-
-end 
+    
+    % start nodes
+    x1 = reshape( x(:,:,1:end-1), 1, []);
+    y1 = reshape( y(:,:,1:end-1), 1, []);
+    z1 = reshape( z(:,:,1:end-1), 1, []);
+    
+    % end nodes
+    x2 = reshape( x(:,:,2:end), 1, []);
+    y2 = reshape( y(:,:,2:end), 1, []);
+    z2 = reshape( z(:,:,2:end), 1, []);
+    
+end
 
 function [x1,y1,z1,x2,y2,z2] = shed_nodes(x,y,z)
-
-% start nodes
-x1 = reshape( x(1:end-1,:,:), 1, []);
-y1 = reshape( y(1:end-1,:,:), 1, []);
-z1 = reshape( z(1:end-1,:,:), 1, []);
-
-% end nodes
-x2 = reshape( x(2:end,:,:), 1, []);
-y2 = reshape( y(2:end,:,:), 1, []);
-z2 = reshape( z(2:end,:,:), 1, []);
-
-end 
+    
+    % start nodes
+    x1 = reshape( x(1:end-1,:,:), 1, []);
+    y1 = reshape( y(1:end-1,:,:), 1, []);
+    z1 = reshape( z(1:end-1,:,:), 1, []);
+    
+    % end nodes
+    x2 = reshape( x(2:end,:,:), 1, []);
+    y2 = reshape( y(2:end,:,:), 1, []);
+    z2 = reshape( z(2:end,:,:), 1, []);
+    
+end
 
 
