@@ -1,4 +1,4 @@
-function [u, v, w] = vortex_line(x1, y1, z1, x2, y2, z2, Gamma, xp, yp, zp)
+function [u, v, w] = vortexLine(x1, y1, z1, x2, y2, z2, Gamma, xp, yp, zp)
     
     % r1 vector (from x1 to xp)
     r1x = xp - x1;
