@@ -43,7 +43,7 @@ for ii = 1:b
         % trailing filament induction
         [x1,y1,z1,x2,y2,z2] = trailed_nodes(x(:,jj,:),y(:,jj,:),z(:,jj,:));
         Gamma = rand(size(x1));
-        [utrailed, vtrailed, wtrailed] = vortexLine(x1, y1, z1, x2, y2, z2, Gamma, xp, yp, zp);
+        [utrailed, vtrailed, wtrailed] = vortexLine_mex(x1, y1, z1, x2, y2, z2, Gamma, xp, yp, zp);
         
         % shed filament induction
         [x1,y1,z1,x2,y2,z2] = shed_nodes(x(:,jj,:),y(:,jj,:),z(:,jj,:));
