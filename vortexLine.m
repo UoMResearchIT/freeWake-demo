@@ -1,4 +1,27 @@
-function [u, v, w] = vortexLine(x1, y1, z1, x2, y2, z2, Gamma, xp, yp, zp)
+function [u, v, w] = vortexLine(x1, y1, z1, x2, y2, z2, Gamma, xp, yp, zp) %#codegen
+    
+    assert(isa(x1, 'double'))
+    assert(isa(y1, 'double'))
+    assert(isa(z1, 'double'))
+    assert(isa(x2, 'double'))
+    assert(isa(y2, 'double'))
+    assert(isa(z2, 'double'))
+    assert(isa(Gamma, 'double'))
+    assert(isa(xp, 'double'))
+    assert(isa(yp, 'double'))
+    assert(isa(zp, 'double'))
+    
+    assert(all(size(x1) >= [1, 1]))
+    assert(all(size(y1) >= [1, 1]))
+    assert(all(size(z1) >= [1, 1]))
+    assert(all(size(x2) >= [1, 1]))
+    assert(all(size(y2) >= [1, 1]))
+    assert(all(size(z2) >= [1, 1]))
+    assert(all(size(Gamma) >= [1, 1]))
+    assert(all(size(xp) >= [1, 1]))
+    assert(all(size(yp) >= [1, 1]))
+    assert(all(size(zp) >= [1, 1]))
+
     
     % r1 vector (from x1 to xp)
     r1x = bsxfun(@minus, xp, x1);
